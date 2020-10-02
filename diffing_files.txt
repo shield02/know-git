@@ -1,0 +1,232 @@
+## COMMANDS
+$ diff rearrange1.py rearrange2.py
+$ cat cpu_usage.diff
+$ patch cpu_usage.py < cpu_usage.diff
+$ diff -u disk_usage_original.py disk_usage_fixed.py > disk_usage.diff
+$ patch disk_usage.py < disk_usage.diff
+
+## TOOLS TO COMPARE FILES
+~ diff 
+~ wdif - highlights the words that have changed in a file
+~ graphical tools that compare files side by side and highlight the differences using color
+    - meld
+    - KDiff3
+    - vimdiff
+
+## COMMENTS
+~ diff command to generate the difference between two files
+~ when we call a diff command we get only the lines that are different bw two files
+~ diff -u to show more details.
+~ diff -u is used to compare two files line by line and have the differing lines compare side-by-side in the same output
+~ the '<' symbol tells us the line was removed while the '>' symbol tells us the line was added
+~ 5c5,6 - indicates the line in the first and second file. the 'c' means that a line changes
+~ 11a13,15 - the 'a' stand for added
+~ psutil module to check the percentage of the CPU that is currently in use
+~ the patch command passes a diff file to a script to apply the changes contained in 
+a diff file to another file
+~ to automatically apply changes to a file, we need to run the patch command on the file that we want 
+to modify with the diff file as input
+~ use the "<" to redirect the content of a file to standard input
+~ use sys.exit to make the return number of the exit code of a script.
+which is the code that causes a program to exit with the corresponding exit value
+
+
+## VERSION CONTROL SYSTEM (VCS)
+~ a VCS keeps track all the different versions that we create as we save our changes.
+~ VCS always access the history of files, no matter how it is implemented internally.
+~ VCS lets us retrieve pas versions of the file or directory and see who changed which files, 
+how each file was changes and when the file was changed.
+~ VCS allows us to make edit to multiple files and treat that collection of eidts as a single change - called a commit.
+~ a VCS even allows to author of a commit to record why the change was made, including what bugs where fixed by the change.
+~ Other VCS - Subversion or Mercurial.
+
+## DNS Zone File
+~ a DNS zone file is a configuration file that specifies the mapping bw IP addressess and host names in your netwrok.
+
+## GIT
+~ GIT is a VCS created in 2005 by Linus Torvalds.
+~ Linus initially created GIT to help manage the task of creating linux kernel.
+~ Unlike some version control systems that are centralized around a single server, GIT has a distributed architecture.
+~ distributed architecture means that every person contributing to a repository has a full copy of the repository on their 
+own local development maachines.
+~ GIT can work as a standalone program as a server and as a client
+~ git-scm.com (scm - source control management. it could be sid to mean the same with VCS)
+~ staging area - also known as index is a file maintained by GIT that contains all the information about wht files and changes 
+are going to go into your next commit
+~ `git init` to initilize a git directory
+~ `git status` command gives information about the current working tree and pending changes
+~ `git commit` gets our changes in the staging area commited into the GIT directory
+~ `git commit` tells GIT we want to save our changes
+~ each time you make a commit, GIT records a new snapshot of the state of your project at that moment. it is like a picture of 
+exactly how all these files looked at a certain moment in time
+~ combined, these snapshots makes up the history of your project
+~ when we operate with GIT our files could be either tracked or untracked
+~ tracked files are part of the snapshot
+~ untracked files aren't a part of snapshot yet
+~ you can skip the staging step and go straight into commit. you do this by `-a` flag to the `git commit` command 
+~ `git commit -a` doesn't work on new files, because those are untracked files
+~ `git commit -a` is a shortcut to stage any changes to tracked files and commit them in one step
+~ GIT uses the HEAD alias to represent the currently checked-out snapshot of your project. this lets you know what the content 
+of your working directory should be
+
+
+
+~ if a file is in a modified state, it means that we've made changes to it that we haven't commited yet
+~ GIT notices when we modifies a file, but won't store it until we add it to the staging area
+
+~ when we stage a file, our modified files become stage files. meaning the changes to those files are ready to be committed to 
+the project
+~ all files that are staged will be part of the next snapshot we take
+~ we stage modified files by adding them to the staging area
+
+
+~ when a file gets commited, the changes made to it are safely stored in a snapshot in the GIT directory
+
+~ so a file tracked by git will first be modified when we change it in any way
+~ then it becomes staged when we mark those changes for tracking
+~ and finally it will get committed when we store those changes in the VCS
+
+~ ls -l checks the contents of the current working tree
+~ `git status` check the current status of our files using 
+~ `git config -l` to check our current configuration
+~ `git log` will display commit messages and does not do line wrap
+~ `git commit -a` to skip `git add` and commit directly
+~ `git log -p` to get more information on our commits and tracked files. the `p` comes from `patch` because it will give us the 
+patch that was created
+~ `git show <commit id>` displays information about a commit and the associated patch
+~ `git log --stat` will cause git log to show some stats about the changes in the commit, like which files were changed and how many 
+lines were added or removed
+~ `git diff` helps us keep track of changes we have made in a file. this command shows only unstaged changes by default
+~ `git diff --staged` shows changes that are staged but not commited
+~ `git add -p` will show us the changes made to a file before being added to staging area
+~ `git log -p -2` to view that last 2 entries in the log
+
+
+~ any GIT project will consist of three sections - the GIT directiry, the working tree, and the staging area
+~ GIT directory contains the history of all the files and changes
+~ working tree contains the current state of the project, including any changes that we've made
+~ the staging area contains the changes that have been marked to be included in the next commit
+
+# COMMIT MESSAGE
+~ a commit message is generally broken up in to a few sections
+~ the first line is a short summary of the commit followed by a blank line
+~ then followed by a full description of the changes which details why they're necessary and anything that 
+might be especially interesting about them or difficult to understand
+~ the first line is usually kept at about 50 characters or less
+~ if multiple -m flag are given, GIT concatenates the values as separate paragraphs
+
+
+# Example of A Good Commit Message
+Provide a good coomit message example
+
+The purpose of the commit is to provide an example of a hand-crafted, 
+artisanal commit message. The first line is a short, approximately 50 character
+summary, followed by an empty line. The subsequent paragraphs are jam-packed 
+with descriptive information about the change, but each line is kept under 72 
+characters in length.
+
+If even more  infromation is needed to explain the change, more paragraphs can 
+be added after blank lines, with links to issues, tickets, or bugs. Remember 
+that in future you will thank current you for your thoughtfulness and foresight!
+
+## Deleting and Renaming Files
+~ `git rm` removes files from your repository
+~ `git mv` to rename files in your repository - `git mv <old file name> <new file name>. can also be used to move 
+files between directories
+~ `gitignore` file - ignor files that we do not want added to our `git status` output. inside this file, we 
+specify rules to tell git which files to skip for the current repo
+
+## Undoing Things
+# Undoing Changes Before Commiting
+~ `git checkout <filename>` changes a file back to its earlier commit state
+~ `git checkout -p` to check out individual changes instead of the whole file
+~ `git reset` to unstage something from the staging area we didn't actually want to commit
+
+# Amending Commits
+~ `git commit --amend` git will take whatever is currently in our staging area and run the `git commit` workflow to 
+override the previous commit. i.e. `git commit --amend` allows us to modify and add changes to the most recent commit
+~ `git commit --amend` is okay for fixing up local commit, it shouldn't be used on public commit, those that have been 
+pushed to a public repository. this is because using the --amend rewrites the git history removing the previous commit 
+and replacing it with the amended one
+
+# Rollbacks
+~ GIT revert doesn't just mean undo. instaed it creates a commit that contains the inverse of all the changes made in 
+the bad commit in order to cancel them out
+~ `git revert` creates a new commit with inverse changes which cancels previous changes instead of making it as though 
+the original commit never happended
+
+# Identifying a Commit
+~ we can target a specific commit by using its commit ID.
+~ the commit ID comes up when we run th `git log` command
+~ the commit ID is the 40 characters long string after the work commit
+
+## Branching and Merging
+~ `git checked` is effectively used to switch branches
+
+# What is a branch?
+~ a branch is just a pointer to a particular commit. it represents an independent line of decelopment in a project of 
+which the commit it points to is the lates link in a chain of developing history
+~ the default branch that git creates for you when a new repository is initialized is called master
+~ branches makes it really easy to experiment with new ideas or strategies and projects
+
+# Creating New Branches
+~ `git branch` can be used to list, create, delete and manipulate branches
+~ `git branch` alone will show you a list of all the branches in our repository
+~ `git branch <branch-name>` to create a new branch with the state of the current branch
+~ `git checkout <branch-name>` updates the working tree to match the selected branch including both the files and the 
+git history. we this command to checkout the latest snapshot for both files and for branches
+~ `git checkout -b <branch-name>` to create and switch to a new branch immediately
+
+# Working with Branches
+~ when we switch branches git will also change files in our working directory or working tree to whatever snapshot 
+head is currently pointing at. also the working directory and commit history will be changed to reflect the snapshot 
+of our project in that branch
+~ when we checkout a new branch and commit on it, those changes will be added to the history of that branch
+~ each branch is just a pointer to a specific commit in a series of snapshots
+~ `git branch -d <branch-name>` deletes a branch that we don't need anymore
+~ `git branch -D <branch-name> forcefully deletes a branch with changes that have not been merged yet
+
+# Merging
+~ merging is the term that GIT usues for combining branched data and history together
+~ `git merge <branch-name>` lets us take the independent snapshot and history of one GIT branch and tangle them into 
+another. this code is run from the branch we want to merge into
+
+# Merge Conflicts
+~ when both branches we are trying to merge have edits to the same part of the same file it results in a merge conflict
+~ in merge conflicts, we can use `git status` to get more information on what is going on
+~ `git log --graph --oneline` shows a summarized view of the commit history for a repository
+    `--graph` for seeing the commits as a graph
+    `--oneline` to only see one line per commit
+~ `git merge --abort` will throw away the merge away and we can start over again. it stops the merge and resets the 
+files in your working tree back to the previous commit before the merge ever happened
+
+## Introduction to GitHub
+
+# What is GitHub?
+~ GIT is a distributed version control system. by distributed it means that each developer has a copy of the whole 
+repository on their own local machine
+~ GitHub is a web-based GIT repository hosting service
+~ GitHub includes extra features like bug tracking, wikis, and task management
+~ GitHub lets us share and access repositories on the web and copy or clone them to our local computer so we can 
+work on them
+
+# Basic Interaction with GitHub
+~ `git clone <repo url` creates a local copy of a remote repo
+~ `git push` gathers all the snapshots we've taken and send them to the remote repository
+~ `git config --global credential.helper cache` a credential helper baked in with GIT. will cache our credentials 
+for 15 mins
+~ `git pull` used to retrieve new changes from the repository
+
+## Using a Remote Repository
+~ HTTP is generally used to allow read only access to a repository
+~ HTTPS and SSH both provides methods for authenticating users so you can control who gets permission to push
+~ when we call a git clone to get a local copy of a remote repository, GIT sets up that remote repository with 
+the default origin name
+~ `git remote -v` to look at the configuration for that remote in the directory of the repo
+~ `git remote show origin` to get more information about our remote
+~ git uses remote branches to keep copies of the data that's stored in the remote repository
+~ `git branch -r` to get a look at the repo that GIT is currently tracking. this branches are read-only
+
+
+
+
