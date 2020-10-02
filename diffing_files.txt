@@ -195,8 +195,10 @@ another. this code is run from the branch we want to merge into
 ~ when both branches we are trying to merge have edits to the same part of the same file it results in a merge conflict
 ~ in merge conflicts, we can use `git status` to get more information on what is going on
 ~ `git log --graph --oneline` shows a summarized view of the commit history for a repository
+~ `git log --graph --oneline --all` shows the different commits and positions in the tree
     `--graph` for seeing the commits as a graph
     `--oneline` to only see one line per commit
+    `--all` to represent all branches
 ~ `git merge --abort` will throw away the merge away and we can start over again. it stops the merge and resets the 
 files in your working tree back to the previous commit before the merge ever happened
 
@@ -223,10 +225,48 @@ for 15 mins
 ~ when we call a git clone to get a local copy of a remote repository, GIT sets up that remote repository with 
 the default origin name
 ~ `git remote -v` to look at the configuration for that remote in the directory of the repo
-~ `git remote show origin` to get more information about our remote
+~ `git remote show origin` to get more information about a single remote repo
 ~ git uses remote branches to keep copies of the data that's stored in the remote repository
-~ `git branch -r` to get a look at the repo that GIT is currently tracking. this branches are read-only
+~ `git branch -r` to list remote branches. get a look at the remote branches that GIT is currently tracking. this branches are read-only
+~ GIT doesn't keep the remote and local repo in sync automatically, it wait until we execute commands to move 
+data around when we are ready
+~ `git fetch` use to sync the data. this command copies the commits done in the remotes repository to the 
+remote branches, so we can see what other people have commit
+~ `git log origin/master` to see the current commits in the remote repo
+~ `git merge origin/master` to integrate the remote origin/master branch and other branches we fetched into our local master branch
+~ `git pull` fetch the remote copy of the current branch and automatically try to merge it into the current local branch
+~ `git remote update` get the content of remote branches without automatically merging any contents into the local branches
 
+## Solving Conflicts
+
+# The Pull-Merge-Push Workflow
+~ `git log -p origin/master` to look at the actual changes in our commit
+~ git will try to do all automatic merges and only leave manual conflicts for us to resolve when the automatic merge fails
+
+# Pushing Remote Branches
+~ `git push -u origin <branch-name>` the very first time we push a branch to a remote repository
+
+# Rebasing Your Changes
+~ rebasing means changing the base commit that's used for our branch
+~ rebase allows GIT to do a fast forward merge and keep history linear
+N/B: he stayed in refactor branch and rebase main branch
+~ `git rebase <branch-name>` 
+~ `git push --delete origin <branch-name>` to remove the remote branch
+~ `git branch -d <branch-name>` to remove the local branch
+~ incases where there are conflicts while trying to rebase, we fix the conflicts we need to
+    `git add <file-name>` add the file 
+    `git rebase --continue` continue the rebase
+
+
+# Best Practices for Collaboration
+~ Always synchronise your branches before starting any work on your own
+~ Avoid having very large changes that modify a lot of different things
+~ When working on a big change, it makes sense to have a separate feature branch
+~ It make sense to regularly merge changes made on the master branch onto the feature branch
+~ If you need to maintain more than one version of a project at the same time, have the lates version of the project in the 
+master branch, and the stable version of the project on a separate branch
+~ You shouldn't rebase changes that have been push to remote repos
+~ Having good commit messages is important
 
 
 
