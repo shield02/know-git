@@ -1,1 +1,3 @@
-# intro_to_git_and_github
+# Know Git
+
+Know the inner workings of Git and GitHub
