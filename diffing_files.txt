@@ -268,5 +268,61 @@ master branch, and the stable version of the project on a separate branch
 ~ You shouldn't rebase changes that have been push to remote repos
 ~ Having good commit messages is important
 
+## Pull Request
+~ forking is a way of creating s copy of the given repository so that it belongs to our user
+~ a pull request is a commit or series of commits that you send to the owner of the repository so that they incorporate it 
+into their tree
+~ markdown is a lightweight markup language. use to write plain text files that are then formatted following some 
+simple rules
+~ `git rebase -i <master-branch>` this is an interactive rebase. we used it to squash our 3 commit messages to one
+
+## Code Reviews
+~ code review is going through someone else's code, documentation, or configuration and checking that it all make sense and 
+follows the expected patterns
+~ the goal of code review is to improve the project by making sure that changes are high quality; and that the contents are easy 
+to understand; that the style is consistent with the overall project; that we don't forget any important cases
+~ code review tools let us comment on someone else's code; this let us leave feedback on how they could make their code better
+~ commom code issues are:
+    ~ unclear names that makes the code hard to understand
+    ~ forgetting to add text
+    ~ forgetting to handle a specific condition
+    ~ typos in cases of documentation
+~ code reviews are not about us being good or bad coders, they're about making our code better
+
+# Managing Collaboration
+~ if you are a project maintainer, it is important that you reply promptly to pull requests and do not let them stagnate
+~ it is important that you understand any changes you accept
+
+# Tracking Issues
+~ issue tracker or bug tracker can help us coordinate our work better
+~ an issues tracker tells us the task that need to be done, the state they're in and who's working on them; the system also lets us 
+add comments to the issue; they also let people report bugs when they come accross them
+~ a popular bug tracker is Bugzilla
+~ when writing an issue's description, it is a good idea to include all the information that we have about the problem or missing 
+feature and any ideas on how to solve it; if new information comes on later on, it can be added as additional comments on the same issue
+~ during merging, to automatically close an issue or pull request in a comment, include a comment or as part of the description of a pull request 
+`Closes: #<issue's number>`
+
+# Continuous Integration
+~ a continuous integration system (CI) will build and test our code every time there's a change. it will run whenever there is a new commit to 
+main branch of our code; it will also run for any changes that come in through pull request
+~ once we have our code automatically built and tested, the next automation step is continuous deployment, which is sometimes called 
+continuous delivery (CD); it means the new code is deployed often; the goal is to avoid roll outs with a lot of changes between two versions 
+of a project and instead do incremental updates with only a few changes at a time; this allow errors to be caught and fixed early
+~ one popular CI/CD system is Jenkins
+~ GitHub popular alternative is Travis
+~ concept of pipelines: pipelines specify the steps that need to run to get the result you want
+~ for a simple python project, the pipelines could be to run the automated test
+~ for a web service written in GO, the pipeline could be - compile the program, run the unit test and the integration tests and finally 
+deploy the code to the test instance
+~ another concepts in CI/CD is artifacts
+~ artifacts is the name used to describe any files that are genrated as part of the pipeline; these typically include the complied version of the code but 
+can include other genrated files like PDFs for the documentation or OS specific packages for easy installation
+~ keep the log of the pipeline builds and test stages to review if things fail
+~ when setting up CI/CD be careful of how you mange secrets
+~ two thing to remember
+    ~ make sure the authorizd entities for the test servers are not the same entities authorized to deploy on the production servers
+    ~ always have a plan to recover your access in case your pipeline gets compromised
+
 
 
